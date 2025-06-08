@@ -105,14 +105,14 @@ Os dados são exibidos em tempo real no terminal.
 ---
 
 ## 👨‍💻 Nossa equipe
-Gustavo Rangel
+### Gustavo Rangel
 💼 Estudante de Análise e Desenvolvimento de Sistemas na FIAP
 🔗 linkedin.com/in/gustavoorangel
 
-David Rapeckman
+### David Rapeckman
 💼 Estudante de Análise e Desenvolvimento de Sistemas na FIAP
 🔗 linkedin.com/in/davidrapeckman
 
-Luis Felippe Morais
+### Luis Felippe Morais
 💼 Estudante de Análise e Desenvolvimento de Sistemas na FIAP
 🔗 linkedin.com/in/luis-felippe-morais-das-neves-16219b2b9
