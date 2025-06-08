@@ -104,7 +104,7 @@ Os dados são exibidos em tempo real no terminal.
 
 ---
 
-## 👨‍💻 Nossa equipe
+👨‍💻 Nossa equipe
 Gustavo Rangel
 💼 Estudante de Análise e Desenvolvimento de Sistemas na FIAP
 🔗 linkedin.com/in/gustavoorangel
