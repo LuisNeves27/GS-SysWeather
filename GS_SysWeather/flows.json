@@ -1,0 +1,220 @@
+[
+    {
+        "id": "mqtt-subscriber",
+        "type": "mqtt in",
+        "z": "ed577cf3da98a199",
+        "name": "Subscriber Wokwi Data",
+        "topic": "sysweather/dados",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "hivemq-broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 440,
+        "y": 340,
+        "wires": [
+            [
+                "debug-output",
+                "process-data",
+                "chart-temp-humidity"
+            ]
+        ]
+    },
+    {
+        "id": "debug-output",
+        "type": "debug",
+        "z": "ed577cf3da98a199",
+        "name": "Debug Wokwi Output",
+        "active": true,
+        "console": false,
+        "complete": "payload",
+        "x": 690,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "process-data",
+        "type": "function",
+        "z": "ed577cf3da98a199",
+        "name": "Processar Dados",
+        "func": "// Fazendo parse do payload recebido (string JSON)\nlet data = {};\ntry {\n    data = JSON.parse(msg.payload);\n} catch (e) {\n    node.error(\"Erro ao converter JSON\", msg);\n    return null;\n}\n\n// Lógica de risco e cor\nvar risco = data.risco;\nvar cidade = data.cidade;\n\nvar alertColor = (risco === \"Alto\") ? \"red\" : \n                 (risco === \"Médio\") ? \"orange\" : \n                 (risco === \"Baixo\") ? \"yellow\" : \"green\";\n\n// Retorna para múltiplas saídas do nó function\nreturn [\n    {\n        payload: {\n            text: \"Status: \" + risco + \" em \" + cidade,\n            color: alertColor\n        }\n    },\n    {\n        payload: data.nivel\n    },\n    {\n        payload: {\n            cidade: cidade,\n            temperatura: Number(data.temperatura).toFixed(1) + \"°C\",\n            umidade: Number(data.humidade).toFixed(1) + \"%\",\n            chuva: data.chuva ? \"Sim\" : \"Não\",\n            risco: risco\n        }\n    }\n];\n",
+        "outputs": 3,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 460,
+        "wires": [
+            [
+                "alert-template"
+            ],
+            [
+                "gauge-water-level"
+            ],
+            [
+                "text-city-info"
+            ]
+        ]
+    },
+    {
+        "id": "gauge-water-level",
+        "type": "ui_gauge",
+        "z": "ed577cf3da98a199",
+        "name": "Nível de Água",
+        "group": "dashboard-group",
+        "order": 3,
+        "width": "4",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Nível do Sensor",
+        "label": "unidades",
+        "format": "{{value}}",
+        "min": 1500,
+        "max": 2000,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "1700",
+        "seg2": "1900",
+        "diff": false,
+        "className": "",
+        "x": 940,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "text-city-info",
+        "type": "ui_text",
+        "z": "ed577cf3da98a199",
+        "group": "dashboard-group",
+        "order": 4,
+        "width": "8",
+        "height": "4",
+        "name": "Informações da Cidade",
+        "label": "Dados Atuais",
+        "format": "{{payload.cidade}}🌡️ {{payload.temperatura}}💧 {{payload.umidade}}🌧️ Chuva: {{payload.chuva}}⚠️ Risco: {{payload.risco}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 940,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "chart-temp-humidity",
+        "type": "ui_chart",
+        "z": "ed577cf3da98a199",
+        "name": "Temperatura e Umidade",
+        "group": "dashboard-group",
+        "order": 1,
+        "width": "12",
+        "height": "6",
+        "label": "Clima em Tempo Real",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "seconds",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#ff7f0e",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 740,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "alert-template",
+        "type": "ui_template",
+        "z": "ed577cf3da98a199",
+        "group": "dashboard-group",
+        "name": "Alerta de Risco",
+        "order": 2,
+        "width": "12",
+        "height": "2",
+        "format": "<div style=\"padding: 10px; background-color: {{msg.payload.color}}; color: white; border-radius: 5px; text-align: center; font-weight: bold;\">\n    {{msg.payload.text}}\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 940,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "hivemq-broker",
+        "type": "mqtt-broker",
+        "name": "HiveMQ Public Broker",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": 15,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "dashboard-group",
+        "type": "ui_group",
+        "name": "Monitoramento Climático",
+        "tab": "dashboard-tab",
+        "order": 1,
+        "disp": true,
+        "width": "12"
+    },
+    {
+        "id": "dashboard-tab",
+        "type": "ui_tab",
+        "name": "Dashboard Wokwi",
+        "icon": "dashboard",
+        "order": 1
+    }
+]
