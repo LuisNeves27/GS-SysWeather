@@ -32,7 +32,7 @@ Monitorar eventos climáticos extremos em tempo real, como enchentes e tempestad
 2. Importe o fluxo (arquivo `.json` exportado do Node-RED).
 3. Configure o broker HiveMQ (Se necessário).
 4. Visualize o painel em tempo real (Dashboard).
-5. Caso ao implementar o Flow pela primeira e ele gerar triangulos vermelhos nos esquetipos: Temperatura e Umidade, Alerta de Risco, Nível de Água e Informações da Cidade apenas de dois cliques em cima de cada e clique feito, ou selecione o grupo se nao estiver selecionado
+5. Caso ao implementar o Flow pela primeira e ele gerar triangulos vermelhos nos arquétipos: Temperatura e Umidade, Alerta de Risco, Nível de Água e Informações da Cidade apenas de dois cliques em cima de cada e clique feito, ou selecione o grupo se nao estiver selecionado
 
 ## Arquitetura de Solução
 A solução segue uma arquitetura simplificada e eficiente, baseada nos seguintes componentes:
@@ -100,6 +100,7 @@ Os dados são exibidos em tempo real no terminal.
 ├── sketch.ino              # Código da ESP32 (simulado no Wokwi)
 ├── diagram.json            # Diagrama da montagem no Wokwi
 ├── fluxo-sysweather.json   # Fluxo exportado do Node-RED (opcional)
+├── libraries.txt           # Biblioteca do Wokwi com as extensões necessárias do projeto
 └── README.md               # Este arquivo
 ```
 
