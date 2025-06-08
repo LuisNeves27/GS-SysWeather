@@ -23,7 +23,7 @@ Monitorar eventos climáticos extremos em tempo real, como enchentes e tempestad
 2. Ou Acesse [https://wokwi.com](https://wokwi.com)
 3. Clique em "New Project", selecione "ESP32".
 4. Substitua o conteúdo pelo `sketch.ino` e `diagram.json`.
-5. Possivelmente terá que instalar as blibliotecas ArduinoJson e PubSubClient
+5. Possivelmente terá que instalar as blibliotecas ArduinoJson e PubSubClient, qualquer coisa estou enviando o arquivo de libraries junto
 6. Rode a simulação e observe o envio de dados via MQTT.
 
 ### Node-RED
