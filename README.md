@@ -23,7 +23,8 @@ Monitorar eventos climáticos extremos em tempo real, como enchentes e tempestad
 2. Ou Acesse [https://wokwi.com](https://wokwi.com)
 3. Clique em "New Project", selecione "ESP32".
 4. Substitua o conteúdo pelo `sketch.ino` e `diagram.json`.
-5. Rode a simulação e observe o envio de dados via MQTT.
+5. Possivelmente terá que instalar as blibliotecas ArduinoJson e PubSubClient
+6. Rode a simulação e observe o envio de dados via MQTT.
 
 ### Node-RED
 
@@ -31,6 +32,7 @@ Monitorar eventos climáticos extremos em tempo real, como enchentes e tempestad
 2. Importe o fluxo (arquivo `.json` exportado do Node-RED).
 3. Configure o broker HiveMQ (Se necessário).
 4. Visualize o painel em tempo real (Dashboard).
+5. Caso ao implementar o Flow pela primeira e ele gerar triangulos vermelhos nos esquetipos: Temperatura e Umidade, Alerta de Risco, Nível de Água e Informações da Cidade apenas de dois cliques em cima de cada e clique feito, ou selecione o grupo se nao estiver selecionado
 
 ## Arquitetura de Solução
 A solução segue uma arquitetura simplificada e eficiente, baseada nos seguintes componentes:
@@ -90,7 +92,6 @@ Os dados são exibidos em tempo real no terminal.
 [image](https://github.com/user-attachments/assets/db91991e-3c1c-4c59-9cfc-b9e32c7e8357)
 ![image1](https://github.com/user-attachments/assets/8c3e75f6-b1b6-49f0-9545-a563d93476a7)
 ![image2](https://github.com/user-attachments/assets/8e16a1b8-76f6-437f-bca8-14e7746b25cd)
-
 
 ## 🧠 Estrutura do Projeto
 
