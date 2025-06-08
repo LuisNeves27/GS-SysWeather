@@ -29,7 +29,7 @@ Monitorar eventos climáticos extremos em tempo real, como enchentes e tempestad
 ### Node-RED
 
 1. Execute no seu ambiente local.
-2. Importe o fluxo (arquivo `.json` exportado do Node-RED).
+2. Importe o fluxo (arquivo `.json` exportado do Node-RED. Flows.json).
 3. Configure o broker HiveMQ (Se necessário).
 4. Visualize o painel em tempo real (Dashboard).
 5. Caso ao implementar o Flow pela primeira e ele gerar triangulos vermelhos nos arquétipos: Temperatura e Umidade, Alerta de Risco, Nível de Água e Informações da Cidade apenas de dois cliques em cima de cada e clique feito, ou selecione o grupo se nao estiver selecionado
